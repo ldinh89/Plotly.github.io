@@ -1,5 +1,5 @@
 function buildGraph(sample) {
-    d3.json("samples.json").then(function(dataValue) {
+    d3.json("samples.json").then((dataValue) => {
         console.log(dataValue); 
         var samples = dataValue.samples;
         var filterredSamples = samples.filter(object => object.id == sample);
@@ -11,7 +11,7 @@ function buildGraph(sample) {
         var y =  filterredSamples[0]["otu_ids"];
         var hoverText = filterredSamples[0]["otu_labels"];
         
-
+            
         
         var trace1 = {
             x: x.slice(0,10).reverse(),
@@ -25,7 +25,7 @@ function buildGraph(sample) {
         var layout1 = {
             margin: {t:300, l:200}
         
-        }
+        };
 
     
 
@@ -76,33 +76,33 @@ function buildMetadata(sample) {
       
     
     });
-  }
+  };
 
 //   buildMetadata(940);
 //   console.log(buildMetadata);
 
 
 
-// function init() {
-//     var selectTestID = d3.select("#selDataset");
-//     d3.json("sample.json").then((dataValue) => {
-//         var sampleID = dataValue.names;
-//         sampleID.forEach((sample) => {
-//             selectTestID.append("option").text(sample).property("value", sample);
+function init() {
+    var selectTestID = d3.select("#selDataset");
+    d3.json("samples.json").then((dataValue) => {
+        var sampleID = dataValue.names;
+        sampleID.forEach((sample) => {
+            selectTestID.append("option").text(sample).property("value", sample);
                         
                         
-//         });
-//         const firstID = sampleID[0];
-//         buildGraph(firstID);
-//         buildMetadata(firstID);
-//     });
-// };
+        });
+        var firstID = sampleID[0];
+        buildGraph(firstID);
+        buildMetadata(firstID);
+    });
+};
 
 
-// function optionChanged(newID) {
-//     buildGraph(newID);
-//     buildMetadata(newID);
-// };
+function optionChanged(newID) {
+    buildGraph(newID);
+    buildMetadata(newID);
+};
 
-// init();
+init();
 
